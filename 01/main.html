@@ -1,0 +1,203 @@
+<html>
+    <head>
+        <title>作业2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
+    <body>
+        <div class="nav">
+            <nav>
+                <li style="float: left; font-size: 1.5em; ">零羽</li>
+                <li><a href="#">日志</a></li> 
+                <li><a href="#">相册</a></li> 
+                <li><a href="/main.html">首页</a></li>
+                <!-- <li style="float: right;"><input type="text"></li> -->
+            </nav>
+        </div>
+        <div class="introduce">
+            <div>
+                <div style="border: none">
+                    <h2>___   作品1   ___</h2>
+                    <div><a href="#"><img src="images/作品1.PNG"></a></div>
+                    <p>
+                        这是我做的第一个作品——模仿天猫
+                    </p>
+                    <a href="#" class="font">点击进入</a>
+                </div>
+                <div>
+                    <h2>___   作品2   ___</h2>
+                   <div><a href="#"><img src="images/作品2.PNG"></a></div>
+                    <p>
+                        这是我做的第二个作品——个人博客
+                    </p>
+                    <a href="#" class="font">点击进入</a>
+                </div>
+                <div>
+                    <h2>___   作品3   ___</h2>
+                </div>
+            </div>
+            <article>
+                <h2>___   关于我   ___</h2>
+                <div><img src="images/头像.PNG"></div>
+                <div>
+                    <div>网名：零光片羽丶</div>
+                    <div>职业：学生</div>
+                    <div>籍贯：湖北省--武汉市</div>
+                    <div>邮箱：123456789@qq.com</div>
+                </div>
+            </article>
+        </div>
+        <div class="section">
+            <div id="demoSliderContainer">
+                <header class="text1">
+                    <h2>精彩瞬间</h2>
+                </header>
+                <ul id="demoSlider" class="slide-images">
+                    <li class="slide-image">
+                    <img src="images/XiEr.jpg" alt="monsters inc" />
+                    </li>
+                    <li class="slide-image">
+                    <img src="images/fulls/02.jpg" alt="nemo" />
+                    </li>
+                    <li class="slide-image">
+                    <img src="images/fulls/03.jpg" alt="up" />
+                    </li>
+                    <li class="slide-image">
+                    <img src="/images/XiEr.jpg" alt="walle" />
+                    </li>
+                </ul>
+                <div class="options">
+                    <a href="javascript:;" class="prevSlide">Prev</a>
+                    <span class="slide-pager">
+                    <a href="" class="javascript:;">1</a>
+                    <a href="" class="javascript:;">2</a>
+                    <a href="" class="javascript:;">3</a>
+                    <a href="" class="javascript:;">4</a>
+                    </span>
+                    <a href="javascript:;" class="nextSlide">Next</a>
+                </div>
+            </div>
+            <div class="post">
+                <header class="text1"><h2>最新日志</h2></header>
+                <div>
+                    <div>07/22</div>
+                    <a href="#">This post demonstrates post content styles</a>
+                    <a href="#" style="float: right;">▶</a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum...</p>
+                </div>
+                <div>
+                    <div>07/22</div>
+                    <a href="#">This post demonstrates post content styles</a>
+                    <a href="#" style="float: right;">▶</a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum...</p>
+                </div>
+                <div>
+                    <div>07/22</div>
+                    <a href="#">My Example Post</a>
+                    <a href="#" style="float: right;">▶</a>
+                    <p>Eos eu docendi tractatos sapientem, brute option menandri in vix,...</p>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+              $(".slide-images").each(function(){
+                var slider = $(this);
+                var slides = $(".slide-image",slider);
+                var sliderPages = $(".slide-pager");
+                
+                //Slide Navigation
+                
+                var currentSlideNum = 0;
+                slides.removeClass("current");
+                slides.eq(currentSlideNum).addClass("current");
+                sliderPages.each(function(){
+                  var pages = $("a",this);
+                  pages.removeClass("current");
+                  pages.eq(currentSlideNum).addClass("current");
+                });
+                
+                var goToSlide = function(slideNum) {
+                  slides.eq(currentSlideNum).removeClass("current");
+                  slides.eq(slideNum).addClass("current");
+                  sliderPages.each(function(){
+                    var pages = $("a", this);
+                    pages.eq(currentSlideNum).removeClass("current");
+                    pages.eq(slideNum).addClass("current");
+                  });
+                  currentSlideNum = slideNum;
+                };
+                
+                var nextSlide = function() {
+                  var nextSlideNum = currentSlideNum + 1;
+                  if(nextSlideNum >= slides.size()) 
+                    nextSlideNum = 0;
+                    goToSlide(nextSlideNum);
+                  
+                }; 
+                
+                var prevSlide = function() {
+                  var prevSlideNum = currentSlideNum - 1;
+                  if(prevSlideNum < 0)
+                    prevSlideNum = slides.size() - 1;
+                    goToSlide(prevSlideNum);
+                  
+                };
+                
+                //Navigation binding
+                
+                $(".prevSlide").click(prevSlide);
+                $(".nextSlide").click(nextSlide);
+                $(".slide-pager a").each(function(i){
+                  if(i >= slides.size()) return false;
+                  $(this).click(function(){
+                    goToSlide(i);
+                  });
+                });
+                //transition effects
+                var setTransitionEffect = function() {
+                slider.attr("class","slide-images "+ "transition-zoom");
+                };
+                $("#transitionEffect").change(function(){
+                setTransitionEffect($(this).val());
+                }).change();
+                //Auto next slide
+                
+                var lastHumanNav = 0;
+                $(".prevSlide, .nextSlide, .slide-pager a").click(function(){
+                  lastHumanNav = new Date().getTime();
+                });
+                setInterval(function(){
+                  var now = new Date().getTime();
+                  if(now - lastHumanNav > 5000)
+                    nextSlide();
+                },5000);
+              });
+            });
+            
+        </script>
+
+        <div class="footer">
+            <div>
+                <h2>零羽</h2>
+                <div>零羽</div>
+            </div>
+            <div style="float: right;">
+                <h2>Connect</h2>
+                <div><img src="images/qq.PNG">:123456789</div>
+                <div><img src="images/@.PNG">:123456789@qq.com</div>
+                <div><img src="images/phone.PNG">:12345678900</div>
+            </div>
+            <div style="float: right;">
+                <h2>Setting</h2>
+                <div>www.baidu.com</div>
+                <div>www.yahoo.com</div>
+                <div>www.idudao.cn</div>
+            </div>
+        </div>
+        <footer>
+                Made by <a href="#">零光片羽丶</a>
+        </footer>
+    </body>
+</html>
