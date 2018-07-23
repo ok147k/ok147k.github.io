@@ -3,16 +3,20 @@ body{
     background-color: #91BECC;
 }
 .nav nav{
-    width: 50%;
+    width: 60%;
+    min-width: 480px;
     height: 70px;
     /* min-height: 32px; */
-    padding: 0 25%;
+    padding: 0 20%;
     background-color: #111;
+    position: fixed;
+    top: 0;
 }
 .nav nav li{
     float: right;
     list-style: none;
-    width: 13%;
+    width: 10%;
+    min-width: 48px;
     height: auto;
     padding: 20px 0.67%;
     text-align: center;
@@ -28,8 +32,9 @@ body{
 }
 
 .introduce{
-    margin: 40px 4.94%;
+    margin: 110px 4.94% 40px;
     width: 90.12%;
+    min-width: 720.96px;
     height: 400px;
 }
 .introduce>div{
@@ -252,5 +257,9 @@ footer a{
 .footer>div{
     margin: 10px 20px;
     float: left;
+    width: 20%;
     height: 180px;
+}
+.footer>div>div>a{
+    text-decoration: none;
 }
